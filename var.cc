@@ -135,10 +135,6 @@ int main()
       {
         double P = 1e-4;
         I_n1 = I_n1 + (delta_T / L) * (-Phi[0]);
-        // U_n1_C3 = xk[3];
-        // U_n1_C4 = xk[1];
-        // U_n1_C5 = xk[2] - xk[3];
-        // U_n1_C5 = xk[2] - xk[3];
         E = E_n * sin((2 * 3.14 * now_T) / P);
         I2 = It * (exp(U_n1_C5 / mFt) - 1.0);
 
@@ -203,15 +199,15 @@ int main()
         // xk[i] = 15;
       }
 
-      if(iter>25){
+      if (iter > 25)
+      {
         // cout<<"ne soshlos' =("<<endl;
-         return(0);
-       }
+        return (0);
+      }
 
-
-      } while (sup_norm(dPhi) >= eps);
+    } while (sup_norm(dPhi) >= eps);
     // } while (not can_step);
-  iter = 0;
+    iter = 0;
     // fi4 += a[3][n];
     // U_n1_C3 = a[3][n];
     // U_n1_C4 = a[1][n];
