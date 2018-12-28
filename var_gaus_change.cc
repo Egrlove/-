@@ -6,6 +6,7 @@
 #define R1 1e-6
 #define R2 20.0
 #define R3 1e6
+#define R4 1000.0
 
 #define C3 1000e-12
 #define C4 1000e-12
@@ -294,12 +295,12 @@ int main()
                 a[3][0] = 0.0;
                 a[3][1] = 0.0;
                 a[3][2] = -(C5 / dt) - (1 / R3) - (It * exp((Phi[2] - Phi[3]) / mFt)) / mFt;
-                a[3][3] = (C5 / dt) + (1 / R3) + (C3 / dt) + (It * exp((Phi[2] - Phi[3]) / mFt)) / mFt;
+                a[3][3] = (C5 / dt) + (1 / R3) + (1 / R4) + (It * exp((Phi[2] - Phi[3]) / mFt)) / mFt;
 
                 y[0] = -(-(I_n1_iter + (dt / L) * (-Phi[0])) + I_E + (Phi[0] - Phi[1]) / R1);
                 y[1] = -(-I_E + I_C4 + I_R2 - (Phi[0] - Phi[1]) / R1);
                 y[2] = -(-I_R2 + I_C5 + I_R3 + I2);
-                y[3] = -(-I_C5 - I_R3 - I2 + I_C3);
+                y[3] = -(-I_C5 - I_R3 - I2 + Phi[3]/R4);
             }
             
             {
@@ -339,12 +340,12 @@ int main()
 
         if (now_T > 0.000002)
         {
-            double k = pr2(dfn2, dfn1, dPhi, n);
+            // double k = pr2(dfn2, dfn1, dPhi, n);
             //cout<<pp<<endl;
             //  PrintVctr(df,n);
 
-            dtmod(k);
-            // double k = sup_norm(dPhi);
+            // dtmod(k);
+            double k = sup_norm(dPhi);
 
             if (k < eps2)
             {
